@@ -202,6 +202,10 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(16,14,8,.55);b
 .price b{font-family:Oswald,sans-serif;font-size:56px;line-height:1;color:var(--cream)}
 .price s{color:var(--text-dim);font-size:20px}
 .signup-form{padding:52px 46px}
+.signup-cta{display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.signup-cta p{max-width:420px}
+.signup-cta .btn{width:100%;max-width:420px;margin-top:30px;padding:19px 32px;font-size:15px}
+.signup-cta .note{text-align:left;margin-top:16px}
 .signup-form h3{font-size:30px;margin-bottom:8px}
 .field{margin-top:18px}
 .field label{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px}
@@ -526,41 +530,11 @@ footer{border-top:1px solid var(--line-soft);padding:46px 0 90px;font-size:13.5p
         </ul>
       </div>
 
-      <div class="signup-form" id="formBox">
-        <div class="head">
-          <h3>Оставьте контакты</h3>
-          <p>Пришлём ссылку на эфир и напомним о старте.</p>
-        </div>
-        <form id="form" novalidate>
-          <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="field" data-f="name">
-            <label for="name">Имя</label>
-            <input id="name" name="name" type="text" placeholder="Как к вам обращаться" autocomplete="given-name">
-            <div class="err">Введите имя</div>
-          </div>
-          <div class="field" data-f="contact">
-            <label for="contact">Telegram или телефон</label>
-            <input id="contact" name="contact" type="text" placeholder="@username или +7 900 000-00-00" autocomplete="off">
-            <div class="err">Укажите Telegram (@username) или телефон</div>
-          </div>
-          <div class="field" data-f="email">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@mail.com" autocomplete="email">
-            <div class="err">Проверьте адрес почты</div>
-          </div>
-          <label class="consent" id="consentRow">
-            <input type="checkbox" id="consent">
-            <span>Согласен на <a href="#" target="_blank" rel="noopener">обработку персональных данных</a> и с <a href="#" target="_blank" rel="noopener">политикой конфиденциальности</a></span>
-          </label>
-          <button class="btn btn-gold" type="submit" id="submitBtn">Зарегистрироваться</button>
-          <p class="note">Без спама. Напоминания только о мастер-классе.</p>
-        </form>
-        <div class="success" id="success">
-          <div class="ok">✓</div>
-          <h3>Вы в списке!</h3>
-          <p>Спасибо, <b id="okName" style="color:var(--cream)"></b>. Мы свяжемся с вами и пришлём ссылку на эфир перед стартом.</p>
-          <a id="tgLink" class="btn btn-ghost" style="margin-top:26px" href="#" target="_blank" rel="noopener">Перейти в Telegram-канал</a>
-        </div>
+      <div class="signup-form signup-cta">
+        <h3>Занять место на мастер-классе</h3>
+        <p>Нажмите кнопку, чтобы зарегистрироваться. Ссылку на эфир и напоминания о старте вы получите после регистрации.</p>
+        <a id="regBtn" class="btn btn-gold" href="#" target="_blank" rel="noopener" data-cta="register">Зарегистрироваться</a>
+        <p class="note">Участие бесплатное · 24, 25 и 26 ноября</p>
       </div>
     </div>
   </div>
@@ -647,16 +621,14 @@ const CONFIG = {
   day3: '26 ноября',
   price: '0 ₽',            // например '990 ₽'
   oldPrice: '',            // например '2 990 ₽' (зачёркнутая цена) или пусто
-  telegram: 'https://t.me/',   // ссылка на ваш Telegram после регистрации
-  // Куда отправлять заявки (POST, JSON). Пусто = заявки только сохраняются в браузере.
-  // Подойдёт Make/Zapier webhook, Formspree, Google Apps Script и т.п.
-  formEndpoint: ''
+  // Куда ведёт кнопка «Зарегистрироваться» (Telegram-бот, GetCourse, страница регистрации и т.п.)
+  registerUrl: 'https://t.me/'
 };
 /* ============================================================== */
 
 // подстановка настроек в текст
 document.querySelectorAll('[data-cfg]').forEach(el=>{el.textContent=CONFIG[el.dataset.cfg]||''});
-document.getElementById('tgLink').href=CONFIG.telegram;
+document.getElementById('regBtn').href=CONFIG.registerUrl;
 
 // таймер
 (function(){
@@ -686,59 +658,6 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     st.classList.toggle('show',y>hb && !(r.top<innerHeight*.6 && r.bottom>0));
   }
   addEventListener('scroll',upd,{passive:true});upd();
-})();
-
-// форма
-(function(){
-  const form=document.getElementById('form'),box=document.getElementById('formBox');
-  const val={
-    name:v=>v.trim().length>=2,
-    contact:v=>/^@?[A-Za-z0-9_]{4,32}$/.test(v.trim())||/^\+?[\d\s\-()]{10,18}$/.test(v.trim()),
-    email:v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())
-  };
-  Object.keys(val).forEach(k=>{
-    const f=form.querySelector('[data-f="'+k+'"]');
-    f.querySelector('input').addEventListener('input',()=>f.classList.remove('bad'));
-  });
-  document.getElementById('consent').addEventListener('change',()=>document.getElementById('consentRow').classList.remove('bad'));
-
-  form.addEventListener('submit',async e=>{
-    e.preventDefault();
-    let ok=true;
-    Object.keys(val).forEach(k=>{
-      const f=form.querySelector('[data-f="'+k+'"]');
-      const good=val[k](f.querySelector('input').value);
-      f.classList.toggle('bad',!good);if(!good)ok=false;
-    });
-    const c=document.getElementById('consent');
-    document.getElementById('consentRow').classList.toggle('bad',!c.checked);
-    if(!c.checked)ok=false;
-    if(!ok){const b=form.querySelector('.bad');b&&b.scrollIntoView({block:'center',behavior:'smooth'});return}
-    if(form.company.value)return; // антиспам-ловушка
-
-    const data={
-      name:form.name.value.trim(),
-      contact:form.contact.value.trim(),
-      email:form.email.value.trim(),
-      page:location.href,
-      at:new Date().toISOString()
-    };
-    const btn=document.getElementById('submitBtn');
-    btn.disabled=true;btn.textContent='Отправляем…';
-    try{
-      if(CONFIG.formEndpoint){
-        const r=await fetch(CONFIG.formEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-        if(!r.ok)throw new Error('http '+r.status);
-      }
-      try{const l=JSON.parse(localStorage.getItem('mc_leads')||'[]');l.push(data);localStorage.setItem('mc_leads',JSON.stringify(l))}catch(_){}
-      document.getElementById('okName').textContent=data.name;
-      box.classList.add('done');
-      box.scrollIntoView({block:'center',behavior:'smooth'});
-    }catch(err){
-      btn.disabled=false;btn.textContent='Зарегистрироваться';
-      alert('Не удалось отправить заявку. Проверьте интернет и попробуйте ещё раз.');
-    }
-  });
 })();
 </script>
 </body>
