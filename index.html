@@ -118,6 +118,37 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(16,14,8,.55);b
 .level .fmt{margin-top:18px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim)}
 .level .fmt b{display:block;font-size:15px;letter-spacing:0;text-transform:none;color:var(--cream);margin-top:2px}
 
+/* visuals */
+.viz{height:128px;margin:-6px -6px 22px;padding:14px;border-radius:16px;background:rgba(0,0,0,.28);border:1px solid var(--line-soft);display:flex;flex-direction:column;justify-content:center;gap:8px;font-size:11.5px;position:relative;overflow:hidden}
+.viz *{min-width:0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:100px;border:1px solid var(--line);background:var(--glass);color:var(--cream);font-size:11.5px;white-space:nowrap}
+.chip.g{background:var(--accent-soft);color:var(--accent-2)}
+.chip.dash{border-style:dashed;color:var(--text-dim);background:transparent}
+.chip.bad{border-color:rgba(229,138,122,.45);color:var(--err);background:rgba(229,138,122,.08)}
+.row{display:flex;align-items:center;gap:8px}
+.arrow{color:var(--accent);font-size:14px;flex:none}
+.bar{height:8px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden;flex:1}
+.bar i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,#b08f55,#e3cc9a)}
+.bar i.r{background:linear-gradient(90deg,#b4503f,#e58a7a)}
+.lbl{width:78px;flex:none;color:var(--text-dim)}
+.val{flex:none;color:var(--cream);font-weight:600;width:56px;text-align:right}
+.viz svg{width:100%;height:100%;display:block}
+.fix{margin-top:16px;padding-top:14px;border-top:1px solid var(--line-soft);font-size:13.5px;color:var(--accent-2);display:flex;gap:10px}
+.fix::before{content:"→";color:var(--accent)}
+.fix span{color:var(--text)}
+.fix b{color:var(--cream);font-weight:600}
+.viz.lv{height:150px}
+.bub{max-width:82%;padding:7px 11px;border-radius:12px;font-size:11.5px;line-height:1.35}
+.bub.u{align-self:flex-end;background:var(--accent-soft);color:var(--cream);border-bottom-right-radius:4px}
+.bub.a{align-self:flex-start;background:rgba(255,255,255,.07);border-bottom-left-radius:4px}
+.node{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--accent-soft);color:var(--accent-2);font-size:15px;flex:none}
+.node.big{width:46px;height:46px;font-size:20px;background:linear-gradient(135deg,#e3cc9a,#c8a96e);color:#1a1408;border:0;box-shadow:0 0 0 6px rgba(200,169,110,.12)}
+.auto{margin-top:18px;display:flex;align-items:center;gap:10px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim)}
+.auto .seg{display:flex;gap:4px;flex:1}
+.auto .seg i{flex:1;height:6px;border-radius:6px;background:rgba(255,255,255,.08)}
+.auto .seg i.on{background:var(--accent)}
+.level .fmt{margin-top:14px}
+
 /* program */
 .days{display:grid;gap:18px}
 .day{display:grid;grid-template-columns:200px 1fr;gap:36px;padding:34px;border-radius:24px;border:1px solid var(--line-soft);background:linear-gradient(180deg,var(--glass),rgba(255,255,255,.01))}
@@ -317,12 +348,12 @@ footer{border-top:1px solid var(--line-soft);padding:46px 0 90px;font-size:13.5p
       <p>Шесть типичных ситуаций. Найдите свою.</p>
     </div>
     <div class="cards c3">
-      <div class="card rv"><div class="num">01</div><h3>Клиенты только по сарафану</h3><p>Психолог, коуч, консультант. Работаете хорошо, но поток людей нестабильный и зависит от рекомендаций.</p></div>
-      <div class="card rv"><div class="num">02</div><h3>Реклама съедает всё</h3><p>Товар или офлайн-бизнес. Хотите вести трафик без бюджета и без постоянной зависимости от рекламных кабинетов.</p></div>
-      <div class="card rv"><div class="num">03</div><h3>Контент вручную</h3><p>Маркетолог, SMM, продюсер. Всё делаете по шагам и маленькими запросами, а хочется собрать процесс, который работает пачками.</p></div>
-      <div class="card rv"><div class="num">04</div><h3>Контент есть, подписчиков нет</h3><p>Эксперты и авторы. Рилсы лайкают, а подписываются единицы. Нужна система, которая превращает охват в аудиторию.</p></div>
-      <div class="card rv"><div class="num">05</div><h3>Есть знания, но нет оплат</h3><p>Преподаватель, онлайн-школа. Инструменты в закладках, а до денег дело не доходит. Нужен готовый маршрут.</p></div>
-      <div class="card rv"><div class="num">06</div><h3>Ниши пока нет</h3><p>Есть опыт и руки, но непонятно, что продавать. Разберём, как найти продукт и собрать его по заготовкам.</p></div>
+      <div class="card rv"><div class="viz" aria-hidden="true"><svg viewBox="0 0 220 100" aria-label="Нестабильный поток клиентов"><line x1="0" y1="34" x2="220" y2="34" stroke="#c8a96e" stroke-opacity=".35" stroke-dasharray="4 4"/><polyline fill="none" stroke="#e58a7a" stroke-width="2" stroke-linejoin="round" points="0,70 22,40 40,82 62,60 84,88 106,30 128,72 150,84 172,46 196,78 220,56"/><text x="4" y="28" fill="#c8a96e" font-size="9">стабильный поток</text><text x="4" y="98" fill="#7a7060" font-size="9">клиенты по неделям</text></svg></div><div class="num">01</div><h3>Клиенты только по сарафану</h3><p>Психолог, коуч, консультант. Работаете хорошо, но поток людей нестабильный и зависит от рекомендаций.</p><div class="fix"><span>Поток людей, который не зависит от рекомендаций: <b>статьи, боты и воронки</b></span></div></div>
+      <div class="card rv"><div class="viz" aria-hidden="true"><div class="row"><span class="lbl">Выручка</span><div class="bar"><i style="width:100%"></i></div><span class="val">100%</span></div><div class="row"><span class="lbl">Реклама</span><div class="bar"><i class="r" style="width:78%"></i></div><span class="val" style="color:var(--err)">−78%</span></div><div class="row"><span class="lbl">Остаётся</span><div class="bar"><i style="width:22%"></i></div><span class="val">22%</span></div></div><div class="num">02</div><h3>Реклама съедает всё</h3><p>Товар или офлайн-бизнес. Хотите вести трафик без бюджета и без постоянной зависимости от рекламных кабинетов.</p><div class="fix"><span>Бесплатный трафик: <b>ролики, поиск и ИИ-аватары</b> вместо рекламных бюджетов</span></div></div>
+      <div class="card rv"><div class="viz" aria-hidden="true"><div class="row"><span class="chip">Сценарий</span><span class="arrow">›</span><span class="chip">Монтаж</span><span class="arrow">›</span><span class="chip">Субтитры</span></div><div class="row"><span class="chip">Описание</span><span class="arrow">›</span><span class="chip bad">вручную, 1 ролик за вечер</span></div></div><div class="num">03</div><h3>Контент вручную</h3><p>Маркетолог, SMM, продюсер. Всё делаете по шагам и маленькими запросами, а хочется собрать процесс, который работает пачками.</p><div class="fix"><span>Агент берёт ролик целиком, а вы получаете <b>контент пачками</b></span></div></div>
+      <div class="card rv"><div class="viz" aria-hidden="true"><div class="row"><span class="lbl">Просмотры</span><div class="bar"><i style="width:100%"></i></div><span class="val">48 тыс.</span></div><div class="row"><span class="lbl">Лайки</span><div class="bar"><i style="width:42%"></i></div><span class="val">6,8 тыс.</span></div><div class="row"><span class="lbl">Подписки</span><div class="bar"><i class="r" style="width:3%"></i></div><span class="val" style="color:var(--err)">+12</span></div></div><div class="num">04</div><h3>Контент есть, подписчиков нет</h3><p>Эксперты и авторы. Рилсы лайкают, а подписываются единицы. Нужна система, которая превращает охват в аудиторию.</p><div class="fix"><span>Охват превращается в аудиторию: <b>воронка по кодовому слову</b></span></div></div>
+      <div class="card rv"><div class="viz" aria-hidden="true"><div class="row" style="flex-wrap:wrap"><span class="chip">Claude</span><span class="chip">ChatGPT</span><span class="chip">Codex</span></div><div class="row"><span class="arrow">↓</span><span class="chip dash">нет пути к оплате</span><span class="arrow">→</span><span class="chip bad">0 ₽</span></div></div><div class="num">05</div><h3>Есть знания, но нет оплат</h3><p>Преподаватель, онлайн-школа. Инструменты в закладках, а до денег дело не доходит. Нужен готовый маршрут.</p><div class="fix"><span>Готовый маршрут: <b>продукт → воронка → оплата</b></span></div></div>
+      <div class="card rv"><div class="viz" aria-hidden="true"><div class="row" style="justify-content:center"><span class="node big" style="font-size:22px">?</span></div><div class="row" style="justify-content:center"><span class="chip dash">продукт</span><span class="chip dash">аудитория</span><span class="chip dash">ниша</span></div></div><div class="num">06</div><h3>Ниши пока нет</h3><p>Есть опыт и руки, но непонятно, что продавать. Разберём, как найти продукт и собрать его по заготовкам.</p><div class="fix"><span>Агент «Продукт» читает нишу и собирает, <b>что продавать</b></span></div></div>
     </div>
   </div>
 </section>
@@ -353,9 +384,9 @@ footer{border-top:1px solid var(--line-soft);padding:46px 0 90px;font-size:13.5p
       <h2>Выберите, <span class="dim">на каком уровне</span> вы хотите работать</h2>
     </div>
     <div class="cards c3">
-      <div class="card level rv"><div class="lvl">1</div><h3>Чат</h3><p>Задаёте вопрос и получаете ответ. Нужное переносите в свои материалы вручную.</p><div class="fmt">формат работы<b>Вопрос</b></div></div>
-      <div class="card level rv"><div class="lvl">2</div><h3>Один агент</h3><p>Поручаете одну задачу: текст, монтаж или разработку. Проверяете результат.</p><div class="fmt">формат работы<b>Задача</b></div></div>
-      <div class="card level hl rv"><div class="lvl">3</div><h3>Команда агентов</h3><p>Делите работу между агентами, задаёте роли, передаёте материалы и проверяете итог. Это разбираем на мастер-классе.</p><div class="fmt">формат работы<b>Процесс</b></div></div>
+      <div class="card level rv"><div class="viz lv" aria-hidden="true"><div class="bub u">Напиши пост про наш продукт</div><div class="bub a">Вот текст поста…</div><div class="row" style="justify-content:flex-end"><span class="chip dash">копируете вручную ↗</span></div></div><div class="lvl">1</div><h3>Чат</h3><p>Задаёте вопрос и получаете ответ. Нужное переносите в свои материалы вручную.</p><div class="fmt">формат работы<b>Вопрос</b></div><div class="auto">Автономность<span class="seg"><i class="on"></i><i></i><i></i></span></div></div>
+      <div class="card level rv"><div class="viz lv" aria-hidden="true"><div class="row" style="justify-content:space-between"><span class="chip">Задача: смонтировать ролик</span></div><div class="row" style="justify-content:center;gap:14px"><span class="arrow">↓</span><span class="node big">◈</span><span class="arrow">↓</span></div><div class="row" style="justify-content:space-between"><span class="chip g">Готовый ролик</span><span class="chip dash">вы проверяете</span></div></div><div class="lvl">2</div><h3>Один агент</h3><p>Поручаете одну задачу: текст, монтаж или разработку. Проверяете результат.</p><div class="fmt">формат работы<b>Задача</b></div><div class="auto">Автономность<span class="seg"><i class="on"></i><i class="on"></i><i></i></span></div></div>
+      <div class="card level hl rv"><div class="viz lv" aria-hidden="true"><svg viewBox="0 0 220 120" aria-label="Команда агентов"><g stroke="#c8a96e" stroke-opacity=".5" fill="none"><path d="M110 30V50M110 50H26V68M110 50H68V68M110 50V68M110 50H152V68M110 50H194V68"/></g><circle cx="110" cy="18" r="15" fill="#c8a96e"/><text x="110" y="23" text-anchor="middle" font-size="14" fill="#1a1408">◉</text><g fill="rgba(200,169,110,.14)" stroke="#c8a96e" stroke-opacity=".6"><circle cx="26" cy="80" r="12"/><circle cx="68" cy="80" r="12"/><circle cx="110" cy="80" r="12"/><circle cx="152" cy="80" r="12"/><circle cx="194" cy="80" r="12"/></g><g fill="#e3cc9a" font-size="11" text-anchor="middle"><text x="26" y="84">◈</text><text x="68" y="84">▶</text><text x="110" y="84">⌕</text><text x="152" y="84">⇢</text><text x="194" y="84">☾</text></g><g fill="#b8b09e" font-size="8" text-anchor="middle"><text x="26" y="108">продукт</text><text x="68" y="108">контент</text><text x="110" y="108">SEO</text><text x="152" y="108">воронки</text><text x="194" y="108">дежурный</text></g></svg></div><div class="lvl">3</div><h3>Команда агентов</h3><p>Делите работу между агентами, задаёте роли, передаёте материалы и проверяете итог. Это разбираем на мастер-классе.</p><div class="fmt">формат работы<b>Процесс</b></div><div class="auto">Автономность<span class="seg"><i class="on"></i><i class="on"></i><i class="on"></i></span></div></div>
     </div>
   </div>
 </section>
