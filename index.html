@@ -53,6 +53,9 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(16,14,8,.55);b
 .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
 .logo{font-family:Oswald,sans-serif;font-weight:700;font-size:21px;letter-spacing:1px;color:var(--cream);text-transform:uppercase}
 .logo span{color:var(--accent)}
+.brand{display:flex;align-items:center;gap:12px}
+.ava{position:relative;display:block;width:44px;height:44px;flex:none;border-radius:50%;overflow:hidden;border:1px solid var(--line);box-shadow:0 0 0 3px rgba(200,169,110,.1);background:var(--bg-3)}
+.ava img{position:absolute;width:190px;max-width:none;left:-81px;top:-43px}
 .menu{display:flex;gap:34px;font-size:14px}
 .menu a{transition:color .2s}.menu a:hover{color:var(--cream)}
 
@@ -180,6 +183,7 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(16,14,8,.55);b
 .author{background:var(--bg-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
 .author-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:center}
 .author .photo{aspect-ratio:1/1.12}
+.author .photo img{object-position:56% center}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:30px 0}
 .stats div{padding:16px 0;border-top:1px solid var(--line)}
 .stats b{display:block;font-family:Oswald,sans-serif;font-size:36px;color:var(--cream);line-height:1.1}
@@ -286,7 +290,7 @@ footer{border-top:1px solid var(--line-soft);padding:46px 0 90px;font-size:13.5p
 
 <header>
   <div class="wrap nav">
-    <a href="#top" class="logo">НЕЙРОСЕТИ<span>.</span>БИЗНЕС</a>
+    <a href="#top" class="brand"><span class="ava"><img src="assets/hero-cover.jpg" alt="" onerror="this.parentNode.style.display='none'"></span><span class="logo">НЕЙРОСЕТИ<span>.</span>БИЗНЕС</span></a>
     <nav class="menu">
       <a href="#for">Для кого</a>
       <a href="#team">Как это работает</a>
