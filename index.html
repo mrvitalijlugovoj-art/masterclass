@@ -105,12 +105,15 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(16,14,8,.55);b
 
 /* agents */
 .team{background:var(--bg-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
-.boss{margin:0 auto 22px;max-width:560px;text-align:center;padding:24px 28px;border-radius:22px;border:1px solid var(--line);background:var(--accent-soft)}
+.boss{position:relative;margin:0 auto 44px;max-width:560px;text-align:center;padding:24px 28px;border-radius:22px;border:1px solid var(--line);background:var(--accent-soft)}
 .boss b{font-family:Oswald,sans-serif;text-transform:uppercase;font-size:22px;color:var(--cream);letter-spacing:.5px;display:block}
 .boss span{font-size:14px}
 .agents{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}
-.agents::before{content:"";position:absolute;left:10%;right:10%;top:-22px;height:22px;border:1px solid var(--line);border-bottom:0;border-radius:14px 14px 0 0;opacity:.7}
-.agent{padding:22px 18px;border-radius:18px;background:var(--bg);border:1px solid var(--line-soft)}
+.boss::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:22px;background:var(--line);transform-origin:top}
+.agents::before{content:"";position:absolute;left:12.5%;right:12.5%;top:-22px;height:1px;background:var(--line)}
+.agent{position:relative;padding:22px 18px;border-radius:18px;background:var(--bg);border:1px solid var(--line-soft)}
+.agent::before{content:"";position:absolute;left:50%;top:-22px;width:1px;height:22px;background:var(--line);transform-origin:top}
+.agent::after{content:"";position:absolute;left:50%;top:-22px;width:5px;height:5px;margin-left:-2px;border-radius:50%;background:var(--accent-2);opacity:0;pointer-events:none}
 .agent i{display:flex;width:42px;height:42px;border-radius:12px;align-items:center;justify-content:center;background:var(--accent-soft);color:var(--accent-2);font-style:normal;font-size:20px;margin-bottom:14px}
 .agent b{display:block;color:var(--cream);font-size:16px;margin-bottom:6px}
 .agent span{font-size:13.5px;line-height:1.5;display:block}
@@ -246,6 +249,42 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(16,14,8,.55);b
   #team .card.in .auto .seg i.on:nth-child(3){animation-delay:1.2s}
 }
 @media (prefers-reduced-motion:reduce){#team .viz svg .pkt,#team .viz svg .bring,#team .bub.typing{display:none}}
+/* анимация блока агентов */
+@keyframes rise{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes grow-y{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes grow-xc{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes bossglow{0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,.35)}50%{box-shadow:0 0 0 12px rgba(200,169,110,0)}}
+@keyframes drip{0%{opacity:0;transform:translateY(0)}12%{opacity:1}60%{opacity:1;transform:translateY(22px)}72%,100%{opacity:0;transform:translateY(22px)}}
+@keyframes spin-s{0%,100%{transform:rotate(0)}50%{transform:rotate(90deg)}}
+@keyframes beat-s{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+@keyframes slide-x{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
+@keyframes moon{0%,100%{filter:none;transform:rotate(0)}50%{filter:drop-shadow(0 0 6px rgba(227,204,154,.9));transform:rotate(-12deg)}}
+@media (prefers-reduced-motion:no-preference){
+  .boss.rv{opacity:1;transform:none}
+  .boss.in{animation:rise .6s cubic-bezier(.2,.8,.2,1) both,bossglow 2.8s ease-in-out 1.6s infinite}
+  .boss::after{transform:scaleY(0)}
+  .boss.in::after{animation:grow-y .35s ease-out .5s forwards}
+  .agents::before{transform:scaleX(0)}
+  .agents.in::before{animation:grow-xc .6s cubic-bezier(.3,.6,.3,1) .85s forwards}
+  .agent::before{transform:scaleY(0)}
+  .agents.in .agent::before{animation:grow-y .3s ease-out 1.4s forwards}
+  .agents.rv{opacity:1;transform:none}
+  .agents .agent{opacity:0}
+  .agents.in .agent{animation:rise .6s cubic-bezier(.2,.8,.2,1) forwards}
+  .agents.in .agent:nth-child(1){animation-delay:1.6s}
+  .agents.in .agent:nth-child(2){animation-delay:1.75s}
+  .agents.in .agent:nth-child(3){animation-delay:1.9s}
+  .agents.in .agent:nth-child(4){animation-delay:2.05s}
+  .agents.in .agent::after{animation:drip 2.6s ease-in infinite}
+  .agents.in .agent:nth-child(1)::after{animation-delay:2.6s}
+  .agents.in .agent:nth-child(2)::after{animation-delay:3.2s}
+  .agents.in .agent:nth-child(3)::after{animation-delay:3.8s}
+  .agents.in .agent:nth-child(4)::after{animation-delay:4.4s}
+  .agents.in .agent:nth-child(1) i{animation:spin-s 4s ease-in-out 2.4s infinite}
+  .agents.in .agent:nth-child(2) i{animation:beat-s 2s ease-in-out 2.6s infinite}
+  .agents.in .agent:nth-child(3) i{animation:slide-x 1.8s ease-in-out 2.8s infinite}
+  .agents.in .agent:nth-child(4) i{animation:moon 3s ease-in-out 3s infinite}
+}
 /* program */
 .days{display:grid;gap:18px}
 .day{display:grid;grid-template-columns:200px 1fr;gap:36px;padding:34px;border-radius:24px;border:1px solid var(--line-soft);background:linear-gradient(180deg,var(--glass),rgba(255,255,255,.01))}
@@ -359,7 +398,7 @@ footer{border-top:1px solid var(--line-soft);padding:46px 0 90px;font-size:13.5p
   .hero .photo{max-width:480px;margin-top:0}
   .c3{grid-template-columns:1fr}
   .c2{grid-template-columns:1fr}
-  .agents{grid-template-columns:1fr 1fr}.agents::before{display:none}
+  .agents{grid-template-columns:1fr 1fr}.agents::before,.agent::before,.agent::after,.boss::after{display:none}.boss{margin-bottom:22px}
   .day{grid-template-columns:1fr;gap:18px;padding:26px}
   .day .when b{font-size:56px}
   .signup-info{border-right:0;border-bottom:1px solid var(--line-soft)}
