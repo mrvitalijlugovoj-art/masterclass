@@ -156,41 +156,6 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(16,14,8,.55);b
 .auto .seg i.on{background:var(--accent)}
 .level .fmt{margin-top:14px}
 
-/* анимация визуализаций «Для кого» */
-@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes pop{from{opacity:0;transform:translateY(7px) scale(.92)}to{opacity:1;transform:none}}
-@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
-@keyframes fadein{to{opacity:1}}
-@keyframes beat{0%,100%{box-shadow:0 0 0 0 rgba(229,138,122,.5)}50%{box-shadow:0 0 0 8px rgba(229,138,122,0)}}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-@keyframes ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(4);opacity:0}}
-@keyframes flicker{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes sheen{0%{transform:translateX(-120%)}60%,100%{transform:translateX(220%)}}
-#for .viz .row:nth-child(1){--r:0}
-#for .viz .row:nth-child(2){--r:5}
-#for .viz .row>:nth-child(1){--d:0}
-#for .viz .row>:nth-child(2){--d:1}
-#for .viz .row>:nth-child(3){--d:2}
-#for .viz .row>:nth-child(4){--d:3}
-#for .viz .row>:nth-child(5){--d:4}
-@media (prefers-reduced-motion:no-preference){
-  #for .viz .bar i{transform:scaleX(0);transform-origin:left center}
-  #for .viz .chip,#for .viz .arrow,#for .viz .node{opacity:0}
-  #for .viz svg .ln{stroke-dasharray:1;stroke-dashoffset:1}
-  #for .viz svg .dot{opacity:0}
-  #for .viz .bar{position:relative}
-  #for .card.in .viz .bar i{animation:grow 1.1s cubic-bezier(.2,.8,.2,1) forwards}
-  #for .card.in .viz .row:nth-child(2) .bar i{animation-delay:.3s}
-  #for .card.in .viz .row:nth-child(3) .bar i{animation-delay:.6s}
-  #for .card.in .viz .bar i.r{animation:grow 1.1s cubic-bezier(.2,.8,.2,1) .6s forwards,flicker 1.8s ease-in-out 2s infinite}
-  #for .card.in .viz .chip,#for .card.in .viz .arrow,#for .card.in .viz .node{animation:pop .5s cubic-bezier(.2,.8,.2,1) calc((var(--r,0) + var(--d,0)) * .12s + .2s) forwards}
-  #for .card.in .viz .chip.bad{animation:pop .5s cubic-bezier(.2,.8,.2,1) calc((var(--r,0) + var(--d,0)) * .12s + .2s) forwards,beat 2s ease-out 1.8s infinite}
-  #for .card.in .viz .node{animation:pop .6s cubic-bezier(.2,.8,.2,1) .1s forwards,bob 3s ease-in-out .8s infinite}
-  #for .card.in .viz svg .ln{animation:draw 2s cubic-bezier(.3,.6,.3,1) .2s forwards}
-  #for .card.in .viz svg .dot{animation:fadein .2s ease 2.1s forwards}
-  #for .viz svg .ring{transform-box:fill-box;transform-origin:center}
-  #for .card.in .viz svg .ring{animation:fadein .01s 2.1s forwards,ping 2s ease-out 2.1s infinite}
-}
 /* анимация «Три уровня» */
 @keyframes sgrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes flow{0%{transform:translateY(-3px);opacity:.2}50%{opacity:1}100%{transform:translateY(4px);opacity:.2}}
@@ -293,6 +258,32 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(16,14,8,.55);b
 @media (prefers-reduced-motion:no-preference){
   .btn[data-cta="hero"],.btn[data-cta="final"],.btn[data-cta="sticky"]{animation:blink 2.8s ease-in-out infinite}
   .btn[data-cta="hero"]:hover,.btn[data-cta="final"]:hover,.btn[data-cta="sticky"]:hover{animation:none}
+}
+/* блок «Тебе сюда, если» */
+.sec-head.center{text-align:center;margin-left:auto;margin-right:auto}
+.people{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding-top:96px}
+.persona{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:8px 4px 4px;cursor:pointer;outline:none}
+.persona .disc{display:flex;align-items:center;justify-content:center;width:112px;height:112px;margin-bottom:10px;border-radius:50%;background:radial-gradient(circle at 50% 35%,rgba(200,169,110,.22),rgba(200,169,110,.04) 70%);border:1px solid var(--line-soft);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s,background .3s}
+.persona .disc svg{width:58px;height:58px;transition:transform .35s}
+.persona b{font-family:Oswald,sans-serif;text-transform:uppercase;font-size:17px;line-height:1.15;letter-spacing:.4px;color:var(--cream);font-weight:600;transition:color .3s}
+.persona small{font-size:13px;line-height:1.4;color:var(--text-dim);max-width:150px}
+.persona.on .disc,.persona:hover .disc,.persona:focus-visible .disc{transform:translateY(-6px) scale(1.06);border-color:var(--accent);box-shadow:0 18px 40px -14px rgba(200,169,110,.55),0 0 0 8px rgba(200,169,110,.08);background:radial-gradient(circle at 50% 35%,rgba(227,204,154,.4),rgba(200,169,110,.08) 70%)}
+.persona.on .disc svg{transform:scale(1.08)}
+.persona.on b{color:var(--accent-2)}
+.bubble{position:absolute;top:0;left:0;max-width:300px;padding:14px 18px;border-radius:16px;background:var(--cream);color:#1a1408;font-size:14px;line-height:1.4;font-weight:500;box-shadow:0 14px 34px -12px rgba(0,0,0,.7);transition:transform .45s cubic-bezier(.2,.8,.2,1);will-change:transform;pointer-events:none}
+.bubble::after{content:"";position:absolute;left:var(--tail,50%);bottom:-7px;width:14px;height:14px;margin-left:-7px;background:var(--cream);transform:rotate(45deg);border-radius:2px;transition:left .45s cubic-bezier(.2,.8,.2,1)}
+.bubble span{display:block;transition:opacity .25s}
+.bubble.swap span{opacity:0}
+@media (max-width:980px){
+  .people{grid-template-columns:repeat(3,1fr);gap:26px 10px;padding-top:110px}
+  .persona .disc{width:96px;height:96px}
+  .persona .disc svg{width:50px;height:50px}
+}
+@media (max-width:560px){
+  .people{padding-top:120px}
+  .persona .disc{width:84px;height:84px}
+  .persona b{font-size:15px}
+  .persona small{font-size:12px}
 }
 /* program */
 .days{display:grid;gap:18px}
@@ -495,18 +486,18 @@ footer{border-top:1px solid var(--line-soft);padding:46px 0 90px;font-size:13.5p
 <!-- FOR WHOM -->
 <section id="for" style="padding-top:60px">
   <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow">Для кого</p>
+    <div class="sec-head center rv">
       <h2>Тебе сюда, <span class="dim">если</span></h2>
       <p>Шесть типичных ситуаций. Найдите свою.</p>
     </div>
-    <div class="cards c3">
-      <div class="card rv"><div class="viz" aria-hidden="true"><svg viewBox="0 0 220 100" aria-label="Нестабильный поток клиентов"><line x1="0" y1="34" x2="220" y2="34" stroke="#c8a96e" stroke-opacity=".35" stroke-dasharray="4 4"/><polyline class="ln" pathLength="1" fill="none" stroke="#e58a7a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points="0,70 22,40 40,82 62,60 84,88 106,30 128,72 150,84 172,46 196,78 220,56"/><circle class="dot" cx="218" cy="56" r="3.5" fill="#e58a7a"/><circle class="dot ring" cx="218" cy="56" r="3.5" fill="none" stroke="#e58a7a"/><text x="4" y="28" fill="#c8a96e" font-size="9">стабильный поток</text><text x="4" y="98" fill="#7a7060" font-size="9">клиенты по неделям</text></svg></div><div class="num">01</div><h3>Клиенты только по сарафану</h3><p>Психолог, коуч, консультант. Работаете хорошо, но поток людей нестабильный и зависит от рекомендаций.</p><div class="fix"><span>Поток людей, который не зависит от рекомендаций: <b>боты и воронки</b></span></div></div>
-      <div class="card rv"><div class="viz" aria-hidden="true"><div class="row"><span class="lbl">Выручка</span><div class="bar"><i style="width:100%"></i></div><span class="val">100%</span></div><div class="row"><span class="lbl">Реклама</span><div class="bar"><i class="r" style="width:78%"></i></div><span class="val" style="color:var(--err)">−78%</span></div><div class="row"><span class="lbl">Остаётся</span><div class="bar"><i style="width:22%"></i></div><span class="val">22%</span></div></div><div class="num">02</div><h3>Реклама съедает всё</h3><p>Товар или офлайн-бизнес. Хотите вести трафик без бюджета и без постоянной зависимости от рекламных кабинетов.</p><div class="fix"><span>Бесплатный трафик: <b>ролики и ИИ-аватары</b> вместо рекламных бюджетов</span></div></div>
-      <div class="card rv"><div class="viz" aria-hidden="true"><div class="row"><span class="chip">Сценарий</span><span class="arrow">›</span><span class="chip">Монтаж</span><span class="arrow">›</span><span class="chip">Субтитры</span></div><div class="row"><span class="chip">Описание</span><span class="arrow">›</span><span class="chip bad">вручную, 1 ролик за вечер</span></div></div><div class="num">03</div><h3>Контент вручную</h3><p>Маркетолог, SMM, продюсер. Всё делаете по шагам и маленькими запросами, а хочется собрать процесс, который работает пачками.</p><div class="fix"><span>Агент берёт ролик целиком, а вы получаете <b>контент пачками</b></span></div></div>
-      <div class="card rv"><div class="viz" aria-hidden="true"><div class="row"><span class="lbl">Просмотры</span><div class="bar"><i style="width:100%"></i></div><span class="val">48 тыс.</span></div><div class="row"><span class="lbl">Лайки</span><div class="bar"><i style="width:42%"></i></div><span class="val">6,8 тыс.</span></div><div class="row"><span class="lbl">Подписки</span><div class="bar"><i class="r" style="width:3%"></i></div><span class="val" style="color:var(--err)">+12</span></div></div><div class="num">04</div><h3>Контент есть, подписчиков нет</h3><p>Эксперты и авторы. Рилсы лайкают, а подписываются единицы. Нужна система, которая превращает охват в продажи.</p><div class="fix"><span>Охват превращается в продажи: <b>воронка по кодовому слову</b></span></div></div>
-      <div class="card rv"><div class="viz" aria-hidden="true"><div class="row" style="flex-wrap:wrap"><span class="chip">Claude</span><span class="chip">ChatGPT</span><span class="chip">Codex</span></div><div class="row"><span class="arrow">↓</span><span class="chip dash">нет пути к оплате</span><span class="arrow">→</span><span class="chip bad">0 ₽</span></div></div><div class="num">05</div><h3>Есть знания, но нет оплат</h3><p>Преподаватель, онлайн-школа. Инструменты в закладках, а до денег дело не доходит. Нужен готовый маршрут.</p><div class="fix"><span>Готовый маршрут: <b>продукт → воронка → оплата</b></span></div></div>
-      <div class="card rv"><div class="viz" aria-hidden="true"><div class="row" style="justify-content:center"><span class="node big" style="font-size:22px">?</span></div><div class="row" style="justify-content:center"><span class="chip dash">продукт</span><span class="chip dash">аудитория</span><span class="chip dash">ниша</span></div></div><div class="num">06</div><h3>Ниши пока нет</h3><p>Есть опыт и руки, но непонятно, что продавать. Разберём, как найти продукт и собрать его по заготовкам.</p><div class="fix"><span>Агент «Продукт» читает нишу и собирает, <b>что продавать</b></span></div></div>
+    <div class="people rv" id="people">
+      <div class="bubble" id="bubble" aria-live="polite"><span id="bubbleText">«Клиенты приходят только по рекомендациям, а хочется стабильный поток»</span></div>
+      <div class="persona on" tabindex="0" role="button" aria-label="Клиенты по сарафану" data-q="«Клиенты приходят только по рекомендациям, а хочется стабильный поток»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="15" r="6"/><circle cx="13" cy="47" r="6"/><circle cx="51" cy="47" r="6"/><path d="M28 20.5L16.5 41.5M36 20.5L47.5 41.5M20 47H44" stroke-dasharray="3 3.5"/></svg></span><b>Клиенты по сарафану</b><small>психолог, коуч, консультант</small></div>
+      <div class="persona" tabindex="0" role="button" aria-label="Реклама съедает всё" data-q="«Вкладываю в рекламу всё больше, а прибыли всё меньше»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 26h11l23-11v34L21 38H10z"/><path d="M21 38l4 13h7l-3.5-13"/><path d="M50 24c3.5 3.5 3.5 12.5 0 16"/><path d="M55 19c6 6 6 20 0 26" opacity=".5"/></svg></span><b>Реклама съедает всё</b><small>товар или бизнес на земле</small></div>
+      <div class="persona" tabindex="0" role="button" aria-label="Контент руками" data-q="«Каждый ролик делаю вручную и больше ни на что не хватает времени»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="25" width="46" height="29" rx="4"/><path d="M9 25l6-11h9l-6 11M26 25l6-11h9l-6 11M43 25l6-11h6l-6 11"/><path d="M28 33l11 6.5L28 46z" fill="rgba(227,204,154,.25)"/></svg></span><b>Контент руками</b><small>маркетолог, смм, продюсер</small></div>
+      <div class="persona" tabindex="0" role="button" aria-label="Жду 10 000 подписчиков" data-q="«Рилсы смотрят и лайкают, а подписываются единицы»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 52C13 39 11 24 21 19c5.5-2.5 10 .5 11 5 1-4.5 5.5-7.5 11-5 10 5 8 20-11 33z"/><circle cx="51" cy="14" r="8" fill="rgba(227,204,154,.2)"/><path d="M51 10v8M47 14h8"/></svg></span><b>Жду 10 000 подписчиков</b><small>эксперты и авторы</small></div>
+      <div class="persona" tabindex="0" role="button" aria-label="Claude стоит, оплат нет" data-q="«Инструменты настроены, а оплат пока нет»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="17" width="50" height="32" rx="5"/><path d="M7 27h50"/><text x="32" y="43" text-anchor="middle" font-size="13" font-family="Oswald,sans-serif" fill="#e3cc9a" stroke="none">0 ₽</text></svg></span><b>Claude стоит, оплат нет</b><small>преподаватель, онлайн-школа</small></div>
+      <div class="persona" tabindex="0" role="button" aria-label="Ниши пока нет" data-q="«Хочу начать, но не понимаю, какую нишу выбрать»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="32" r="22" stroke-dasharray="3 4"/><text x="32" y="45" text-anchor="middle" font-size="36" font-family="Oswald,sans-serif" fill="#e3cc9a" stroke="none">?</text></svg></span><b>Ниши пока нет</b><small>есть опыт и руки</small></div>
     </div>
   </div>
 </section>
@@ -798,6 +789,44 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     st.classList.toggle('show',y>hb && !(r.top<innerHeight*.6 && r.bottom>0));
   }
   addEventListener('scroll',upd,{passive:true});upd();
+})();
+
+// «Тебе сюда, если»: реплика над выбранным персонажем
+(function(){
+  const box=document.getElementById('people'),bub=document.getElementById('bubble'),txt=document.getElementById('bubbleText');
+  const items=[...box.querySelectorAll('.persona')];
+  let cur=0,timer=null,paused=false;
+  function place(){
+    const it=items[cur],br=box.getBoundingClientRect(),ir=it.getBoundingClientRect();
+    const w=Math.min(300,br.width-8);bub.style.maxWidth=w+'px';
+    const bw=bub.offsetWidth,bh=bub.offsetHeight;
+    const center=ir.left-br.left+ir.width/2;
+    let left=Math.max(0,Math.min(br.width-bw,center-bw/2));
+    const disc=it.querySelector('.disc').getBoundingClientRect();
+    const top=Math.max(0,disc.top-br.top-bh-22);
+    bub.style.transform='translate('+left+'px,'+top+'px)';
+    bub.style.setProperty('--tail',(center-left)+'px');
+  }
+  function select(i,user){
+    if(i===cur&&!user){place();return}
+    items[cur].classList.remove('on');cur=i;items[cur].classList.add('on');
+    bub.classList.add('swap');
+    setTimeout(()=>{txt.textContent=items[cur].dataset.q;bub.classList.remove('swap');place()},200);
+    place();
+  }
+  items.forEach((it,i)=>{
+    it.addEventListener('mouseenter',()=>{paused=true;select(i,true)});
+    it.addEventListener('mouseleave',()=>{paused=false});
+    it.addEventListener('focus',()=>select(i,true));
+    it.addEventListener('click',()=>{paused=true;select(i,true);setTimeout(()=>paused=false,6000)});
+    it.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(i,true)}});
+  });
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!reduce){timer=setInterval(()=>{if(!paused&&!document.hidden)select((cur+1)%items.length)},3800)}
+  addEventListener('resize',place);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);
+  addEventListener('load',place);
+  place();
 })();
 </script>
 </body>
