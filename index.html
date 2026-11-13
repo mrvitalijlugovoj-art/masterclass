@@ -261,29 +261,24 @@ header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(16,14,8,.55);b
 }
 /* блок «Тебе сюда, если» */
 .sec-head.center{text-align:center;margin-left:auto;margin-right:auto}
-.people{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
-.persona{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:8px 4px 4px;cursor:pointer;outline:none}
-.persona .disc{display:flex;align-items:center;justify-content:center;width:112px;height:112px;margin-bottom:10px;border-radius:50%;background:radial-gradient(circle at 50% 35%,rgba(200,169,110,.22),rgba(200,169,110,.04) 70%);border:1px solid var(--line-soft);transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s,background .3s}
-.persona .disc svg{width:58px;height:58px;transition:transform .35s}
-.persona b{font-family:Oswald,sans-serif;text-transform:uppercase;font-size:17px;line-height:1.15;letter-spacing:.4px;color:var(--cream);font-weight:600;transition:color .3s}
+.people{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.persona{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:8px 4px 4px}
+.persona .disc{display:flex;align-items:center;justify-content:center;width:112px;height:112px;margin-bottom:10px;border-radius:50%;background:radial-gradient(circle at 50% 35%,rgba(200,169,110,.22),rgba(200,169,110,.04) 70%);border:1px solid var(--line)}
+.persona .disc svg{width:58px;height:58px}
+.persona b{font-family:Oswald,sans-serif;text-transform:uppercase;font-size:17px;line-height:1.15;letter-spacing:.4px;color:var(--cream);font-weight:600}
 .persona small{font-size:13px;line-height:1.4;color:var(--text-dim);max-width:150px}
-.persona.on .disc,.persona:hover .disc,.persona:focus-visible .disc{transform:translateY(-6px) scale(1.06);border-color:var(--accent);box-shadow:0 18px 40px -14px rgba(200,169,110,.55),0 0 0 8px rgba(200,169,110,.08);background:radial-gradient(circle at 50% 35%,rgba(227,204,154,.4),rgba(200,169,110,.08) 70%)}
-.persona.on .disc svg{transform:scale(1.08)}
-.persona.on b{color:var(--accent-2)}
-.bubble{grid-column:1/-1;order:2;justify-self:center;width:100%;max-width:640px;min-height:68px;margin-top:34px;padding:18px 26px;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:18px;background:var(--accent-soft);border:1px solid var(--line);color:var(--cream);font-size:17px;line-height:1.45;font-weight:500}
-.bubble span{display:block;transition:opacity .25s}
-.bubble.swap span{opacity:0}
+.persona p{margin-top:10px;padding-top:12px;border-top:1px solid var(--line-soft);font-size:14px;line-height:1.5;color:var(--text);max-width:170px}
 @media (max-width:980px){
-  .people{grid-template-columns:repeat(3,1fr);gap:26px 10px}
-  .bubble{margin-top:10px}
+  .people{grid-template-columns:repeat(3,1fr);gap:34px 14px}
   .persona .disc{width:96px;height:96px}
   .persona .disc svg{width:50px;height:50px}
 }
 @media (max-width:560px){
-  .bubble{min-height:84px;font-size:15px;padding:16px 18px}
+  .people{grid-template-columns:repeat(2,1fr);gap:30px 12px}
   .persona .disc{width:84px;height:84px}
   .persona b{font-size:15px}
   .persona small{font-size:12px}
+  .persona p{font-size:13.5px}
 }
 /* program */
 .days{display:grid;gap:18px}
@@ -491,13 +486,12 @@ footer{border-top:1px solid var(--line-soft);padding:46px 0 90px;font-size:13.5p
       <p>Шесть типичных ситуаций. Найдите свою.</p>
     </div>
     <div class="people rv" id="people">
-      <div class="bubble" id="bubble" aria-live="polite"><span id="bubbleText">«Клиенты приходят только по рекомендациям, а хочется стабильный поток»</span></div>
-      <div class="persona on" tabindex="0" role="button" aria-label="Клиенты по сарафану" data-q="«Клиенты приходят только по рекомендациям, а хочется стабильный поток»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="15" r="6"/><circle cx="13" cy="47" r="6"/><circle cx="51" cy="47" r="6"/><path d="M28 20.5L16.5 41.5M36 20.5L47.5 41.5M20 47H44" stroke-dasharray="3 3.5"/></svg></span><b>Клиенты по сарафану</b><small>психолог, коуч, консультант</small></div>
-      <div class="persona" tabindex="0" role="button" aria-label="Реклама съедает всё" data-q="«Вкладываю в рекламу всё больше, а прибыли всё меньше»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 26h11l23-11v34L21 38H10z"/><path d="M21 38l4 13h7l-3.5-13"/><path d="M50 24c3.5 3.5 3.5 12.5 0 16"/><path d="M55 19c6 6 6 20 0 26" opacity=".5"/></svg></span><b>Реклама съедает всё</b><small>товар или бизнес на земле</small></div>
-      <div class="persona" tabindex="0" role="button" aria-label="Контент руками" data-q="«Каждый ролик делаю вручную и больше ни на что не хватает времени»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="25" width="46" height="29" rx="4"/><path d="M9 25l6-11h9l-6 11M26 25l6-11h9l-6 11M43 25l6-11h6l-6 11"/><path d="M28 33l11 6.5L28 46z" fill="rgba(227,204,154,.25)"/></svg></span><b>Контент руками</b><small>маркетолог, смм, продюсер</small></div>
-      <div class="persona" tabindex="0" role="button" aria-label="Жду 10 000 подписчиков" data-q="«Рилсы смотрят и лайкают, а подписываются единицы»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 52C13 39 11 24 21 19c5.5-2.5 10 .5 11 5 1-4.5 5.5-7.5 11-5 10 5 8 20-11 33z"/><circle cx="51" cy="14" r="8" fill="rgba(227,204,154,.2)"/><path d="M51 10v8M47 14h8"/></svg></span><b>Жду 10 000 подписчиков</b><small>эксперты и авторы</small></div>
-      <div class="persona" tabindex="0" role="button" aria-label="Claude стоит, оплат нет" data-q="«Инструменты настроены, а оплат пока нет»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="17" width="50" height="32" rx="5"/><path d="M7 27h50"/><text x="32" y="43" text-anchor="middle" font-size="13" font-family="Oswald,sans-serif" fill="#e3cc9a" stroke="none">0 ₽</text></svg></span><b>Claude стоит, оплат нет</b><small>преподаватель, онлайн-школа</small></div>
-      <div class="persona" tabindex="0" role="button" aria-label="Ниши пока нет" data-q="«Хочу начать, но не понимаю, какую нишу выбрать»"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="32" r="22" stroke-dasharray="3 4"/><text x="32" y="45" text-anchor="middle" font-size="36" font-family="Oswald,sans-serif" fill="#e3cc9a" stroke="none">?</text></svg></span><b>Ниши пока нет</b><small>есть опыт и руки</small></div>
+      <div class="persona"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="15" r="6"/><circle cx="13" cy="47" r="6"/><circle cx="51" cy="47" r="6"/><path d="M28 20.5L16.5 41.5M36 20.5L47.5 41.5M20 47H44" stroke-dasharray="3 3.5"/></svg></span><b>Клиенты по сарафану</b><small>психолог, коуч, консультант</small><p>«Клиенты приходят только по рекомендациям, а хочется стабильный поток»</p></div>
+      <div class="persona"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 26h11l23-11v34L21 38H10z"/><path d="M21 38l4 13h7l-3.5-13"/><path d="M50 24c3.5 3.5 3.5 12.5 0 16"/><path d="M55 19c6 6 6 20 0 26" opacity=".5"/></svg></span><b>Реклама съедает всё</b><small>товар или бизнес на земле</small><p>«Вкладываю в рекламу всё больше, а прибыли всё меньше»</p></div>
+      <div class="persona"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="25" width="46" height="29" rx="4"/><path d="M9 25l6-11h9l-6 11M26 25l6-11h9l-6 11M43 25l6-11h6l-6 11"/><path d="M28 33l11 6.5L28 46z" fill="rgba(227,204,154,.25)"/></svg></span><b>Контент руками</b><small>маркетолог, смм, продюсер</small><p>«Каждый ролик делаю вручную и больше ни на что не хватает времени»</p></div>
+      <div class="persona"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 52C13 39 11 24 21 19c5.5-2.5 10 .5 11 5 1-4.5 5.5-7.5 11-5 10 5 8 20-11 33z"/><circle cx="51" cy="14" r="8" fill="rgba(227,204,154,.2)"/><path d="M51 10v8M47 14h8"/></svg></span><b>Жду 10 000 подписчиков</b><small>эксперты и авторы</small><p>«Рилсы смотрят и лайкают, а подписываются единицы»</p></div>
+      <div class="persona"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="17" width="50" height="32" rx="5"/><path d="M7 27h50"/><text x="32" y="43" text-anchor="middle" font-size="13" font-family="Oswald,sans-serif" fill="#e3cc9a" stroke="none">0 ₽</text></svg></span><b>Claude стоит, оплат нет</b><small>преподаватель, онлайн-школа</small><p>«Инструменты настроены, а оплат пока нет»</p></div>
+      <div class="persona"><span class="disc"><svg viewBox="0 0 64 64" fill="none" stroke="#e3cc9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="32" r="22" stroke-dasharray="3 4"/><text x="32" y="45" text-anchor="middle" font-size="36" font-family="Oswald,sans-serif" fill="#e3cc9a" stroke="none">?</text></svg></span><b>Ниши пока нет</b><small>есть опыт и руки</small><p>«Хочу начать, но не понимаю, какую нишу выбрать»</p></div>
     </div>
   </div>
 </section>
@@ -789,28 +783,6 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     st.classList.toggle('show',y>hb && !(r.top<innerHeight*.6 && r.bottom>0));
   }
   addEventListener('scroll',upd,{passive:true});upd();
-})();
-
-// «Тебе сюда, если»: реплика под пунктами меняется вместе с выбором
-(function(){
-  const box=document.getElementById('people'),bub=document.getElementById('bubble'),txt=document.getElementById('bubbleText');
-  const items=[...box.querySelectorAll('.persona')];
-  let cur=0,timer=null,paused=false;
-  function select(i,user){
-    if(i===cur)return
-    items[cur].classList.remove('on');cur=i;items[cur].classList.add('on');
-    bub.classList.add('swap');
-    setTimeout(()=>{txt.textContent=items[cur].dataset.q;bub.classList.remove('swap')},200);
-  }
-  items.forEach((it,i)=>{
-    it.addEventListener('mouseenter',()=>{paused=true;select(i,true)});
-    it.addEventListener('mouseleave',()=>{paused=false});
-    it.addEventListener('focus',()=>select(i,true));
-    it.addEventListener('click',()=>{paused=true;select(i,true);setTimeout(()=>paused=false,6000)});
-    it.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(i,true)}});
-  });
-  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if(!reduce){timer=setInterval(()=>{if(!paused&&!document.hidden)select((cur+1)%items.length)},3800)}
 })();
 </script>
 </body>
